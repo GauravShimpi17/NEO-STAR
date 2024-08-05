@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="primaryData"
+            type="com.example.registration.viewModel.UserViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        tools:context=".fragment.AddressDetails">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@id/appbarAddress">
+
+            <include
+                android:id="@+id/appbarAddress"
+                layout="@layout/appbar" />
+
+            <EditText
+                android:id="@+id/txtAddress"
+                style="@style/editTextCommon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_address"
+                android:hint="@string/hint_address"
+                android:inputType="text"
+                android:text="@={primaryData.userData.addressData.address}"
+                app:layout_constraintTop_toBottomOf="@id/appbarAddress" />
+
+            <EditText
+                android:id="@+id/txtLandmark"
+                style="@style/editTextCommon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_address"
+                android:hint="@string/hint_landmark"
+                android:inputType="text"
+                android:text="@={primaryData.userData.addressData.landmark}"
+                app:layout_constraintTop_toBottomOf="@id/txtAddress" />
+
+            <EditText
+                android:id="@+id/txtCity"
+                style="@style/editTextCommon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_address"
+                android:hint="@string/hint_city"
+                android:inputType="text"
+                android:text="@={primaryData.userData.addressData.city}"
+                app:layout_constraintTop_toBottomOf="@id/txtLandmark" />
+
+            <Spinner
+                android:id="@+id/spnState"
+                style="@style/styleSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/txtCity" />
+
+            <EditText
+                android:id="@+id/txtPinCode"
+                style="@style/editTextCommon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_address"
+                android:hint="@string/hint_pinCode"
+                android:inputType="number"
+                android:text="@={primaryData.userData.addressData.pinCode}"
+                android:maxLength="6"
+                app:layout_constraintTop_toBottomOf="@id/spnState" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmit"
+                style="@style/btn_common"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_txt_submit"
+                app:layout_constraintTop_toBottomOf="@id/txtPinCode" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

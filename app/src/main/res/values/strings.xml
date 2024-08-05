@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Registration</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_pick">change pick</string>
+    <string name="hint_firstname"><i>Enter you first name here</i></string>
+    <string name="txt_title_firstname">First Name*</string>
+    <string name="txt_title_lastname">Last Name*</string>
+    <string name="hint_lastname">Enter you last name here</string>
+    <string name="txt_title_phone">Phone Number*</string>
+    <string name="hint_phone_number">Enter your 10 digit number</string>
+    <string name="txt_title_email">Email*</string>
+    <string name="txt_email"><i>Your email goes hear</i>></string>
+    <string name="txt_title_gender">Gender</string>
+    <string name="rb_txt_male">Male</string>
+    <string name="rb_txt_female">Female</string>
+    <string name="hint_password">Password</string>
+    <string name="txt_title_password">Password*</string>
+    <string name="txt_title_confirmPassword">Confirm Password*</string>
+    <string name="spn_title_education">Education*</string>
+    <string name="txt_header_education">Educational Info</string>
+    <string name="spn_title_passingYear">Year of Passing*</string>
+    <string name="txt_title_grade">Grade*</string>
+    <string name="hint_grade">Enter your grade or percentage</string>
+    <string name="txt_header_professional">Professional Info</string>
+    <string name="txt_title_experience">Experience*</string>
+    <string name="hint_experience">Enter the years of experience</string>
+    <string name="txt_title_domain">Domain</string>
+    <string name="btn_txt_previous">Previous</string>
+    <string name="btn_txt_next">Next</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_landmark">Landmark</string>
+    <string name="hint_city">City</string>
+    <string name="hint_pinCode">PinCode</string>
+    <string name="btn_txt_submit">Submit</string>
+    <string name="tb_experience_title">Your Info</string>
+    <string name="tb_title_address">Your Address</string>
+    <string name="spinner_prompt">Select your qualification</string>
+    <string name="txt_title_designation">Designation*</string>
+    <string name="hint_designation">Select Designation</string>
+    <string name="hint_domain">Select Domain</string>
+    
+</resources>
