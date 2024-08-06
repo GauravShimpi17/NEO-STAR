@@ -1,21 +1,20 @@
-package com.example.registration.fragment
+package com.example.registration.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.registration.R
 import com.example.registration.databinding.FragmentExperienceDetailsBinding
-import com.example.registration.util.Education
-import com.example.registration.util.State
+import com.example.registration.util.enumClass.Education
 import com.example.registration.util.Util
+import com.example.registration.util.enumClass.Designation
+import com.example.registration.util.enumClass.Domain
 import com.example.registration.viewModel.UserViewModel
 
 
@@ -93,6 +92,12 @@ class ExperienceDetails : Fragment() {
         val spinnerYear = binding.spnPassingYear
         val years = Util.SpinnerUtils.generateYearList()
 
+        val spinnerDesignation = binding.spnDesignation
+        val designation =Designation.entries.map { it.designation }.toMutableList()
+
+        val spinnerDomain = binding.spnDomain
+        val domain = Domain.entries.map { it.domain }.toMutableList()
+
         Util.SpinnerUtils.populateSpinner(
             requireContext(),
             spinnerEducation,
@@ -121,6 +126,39 @@ class ExperienceDetails : Fragment() {
                 "Selected Year: ${selectedYear ?: "None"}",
                 Toast.LENGTH_SHORT
             ).show()
+        }
+
+        Util.SpinnerUtils.populateSpinner(
+            requireContext(),
+            spinnerDesignation,
+            designation,
+            hint = "Select Designation"
+        ) {
+            var designationLevel = Designation.NONE
+            if (it != null) {
+                designationLevel = Designation.valueOf(it.uppercase().replace(" ", "_"))
+            }
+            val oldData = viewModel.userData.get() ?: return@populateSpinner
+            val newData = oldData.copy(professionalInfo = oldData.professionalInfo.copy(designation = designationLevel.toString()))
+            viewModel.userData.set(newData)
+            Toast.makeText(requireContext(), "Selected: ${it ?: "None"}", Toast.LENGTH_SHORT).show()
+        }
+
+        Util.SpinnerUtils.populateSpinner(
+            requireContext(),
+            spinnerDomain,
+            domain,
+            hint = "Select your domain"
+        ) {
+            var domainLevel = Domain.NONE
+            if (it != null) {
+
+                domainLevel = Domain.valueOf(it.uppercase().replace(" ", "_"))
+            }
+            val oldData = viewModel.userData.get() ?: return@populateSpinner
+            val newData = oldData.copy(professionalInfo = oldData.professionalInfo.copy(domain = domainLevel.toString()))
+            viewModel.userData.set(newData)
+            Toast.makeText(requireContext(), "Selected: ${it ?: "None"}", Toast.LENGTH_SHORT).show()
         }
 
         /*val educationLevels = mutableListOf(

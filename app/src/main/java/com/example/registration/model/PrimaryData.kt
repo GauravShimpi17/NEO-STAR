@@ -1,6 +1,11 @@
 package com.example.registration.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "primary_info")
 data class PrimaryData(
+    @PrimaryKey
     var id : String="",
     var firstName : String="",
     var lastName : String="",
@@ -11,5 +16,4 @@ data class PrimaryData(
     var confirmPassword : String = "",
     var professionalInfo: ProfessionalInfo= ProfessionalInfo(),
     var addressData: AddressData=AddressData()
-
 )

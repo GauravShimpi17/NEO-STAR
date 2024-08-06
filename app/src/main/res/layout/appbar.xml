@@ -9,12 +9,13 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
         >
         <TextView
             android:id="@+id/tbTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Register"
+            android:text="@string/tb_title"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_gravity="center"

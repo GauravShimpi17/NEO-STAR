@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:overScrollMode="never"
         android:scrollbars="none"
-        tools:context=".fragment.PrimaryDetails">
+        tools:context=".view.fragment.PrimaryDetails">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,7 +33,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/primaryAppbar"
-                app:shapeAppearanceOverlay="@style/profile_shape" />
+                app:shapeAppearanceOverlay="@style/profile_shape"
+                android:scaleType="fitCenter"
+                />
 
             <ImageButton
                 android:id="@+id/btnSelectProfile"
@@ -41,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/change_pick"
-                android:src="@drawable/baseline_camera_alt_24"
+                android:src="@drawable/ic_edit"
                 app:layout_constraintBottom_toBottomOf="@+id/profileImage"
                 app:layout_constraintEnd_toEndOf="@+id/profileImage"
                 app:layout_constraintStart_toEndOf="@+id/profileImage"

@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:overScrollMode="never"
         android:scrollbars="none"
-        tools:context=".fragment.AddressDetails">
+        tools:context=".view.fragment.AddressDetails">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

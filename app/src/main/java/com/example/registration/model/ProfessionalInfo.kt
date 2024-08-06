@@ -1,7 +1,9 @@
 package com.example.registration.model
 
-import com.example.registration.util.Education
+import androidx.room.Entity
+import com.example.registration.util.enumClass.Education
 
+@Entity(tableName = "professional_info")
 data class ProfessionalInfo(
     var education : Education = Education.NONE,
     var yearOfPassing : String = "",

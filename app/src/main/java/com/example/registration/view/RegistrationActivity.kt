@@ -1,10 +1,10 @@
-package com.example.registration
+package com.example.registration.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.registration.databinding.ActivityRegistrationBinding
-import com.example.registration.fragment.PrimaryDetails
+import com.example.registration.view.fragment.PrimaryDetails
 import com.example.registration.repo.FirebaseUserRepo
 import com.example.registration.viewModel.UserViewModel
 import com.example.registration.viewModel.viewModelFactory.UserViewModelFactory

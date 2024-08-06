@@ -1,4 +1,4 @@
-package com.example.registration.util
+package com.example.registration.util.enumClass
 
 enum class Education(val education: String) {
     NONE("None"),

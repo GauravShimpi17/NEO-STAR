@@ -12,7 +12,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.ExperienceDetails">
+        tools:context=".view.fragment.ExperienceDetails">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -127,14 +127,11 @@
                 android:text="@string/txt_title_designation"
                 app:layout_constraintTop_toBottomOf="@id/txtExperience" />
 
-            <EditText
-                android:id="@+id/etDesignation"
+            <Spinner
+                android:id="@+id/spnDesignation"
                 style="@style/editTextCommon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:text="@={primaryData.userData.professionalInfo.designation}"
-                android:hint="@string/hint_designation"
                 app:layout_constraintTop_toBottomOf="@id/txtTitleDesignation" />
 
             <TextView
@@ -143,16 +140,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_title_domain"
-                app:layout_constraintTop_toBottomOf="@id/etDesignation" />
+                app:layout_constraintTop_toBottomOf="@id/spnDesignation" />
 
-            <EditText
-                android:id="@+id/etDomain"
+            <Spinner
+                android:id="@+id/spnDomain"
                 style="@style/editTextCommon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_domain"
-                android:inputType="textCapWords"
-                android:text="@={primaryData.userData.professionalInfo.domain}"
                 app:layout_constraintTop_toBottomOf="@id/txtTitleDomain" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -160,7 +155,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_txt_previous"
-                app:layout_constraintTop_toBottomOf="@id/etDomain"
+                app:layout_constraintTop_toBottomOf="@id/spnDomain"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btnProfessionalNext"
                 style="@style/btn_previous" />
@@ -170,7 +165,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_txt_next"
-                app:layout_constraintTop_toBottomOf="@id/etDomain"
+                app:layout_constraintTop_toBottomOf="@id/spnDomain"
                 app:layout_constraintStart_toEndOf="@id/btnPrevious"
                 app:layout_constraintEnd_toEndOf="parent"
                 style="@style/btn_common" />

@@ -1,8 +1,11 @@
 package com.example.registration.model
 
-import com.example.registration.util.State
+import androidx.room.Entity
+import com.example.registration.util.enumClass.State
 
+@Entity(tableName = "address_data")
 data class AddressData(
+
     var address : String = "",
     var landmark : String = "",
     var city : String = "",
