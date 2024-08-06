@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_grade"
                 android:inputType="textCapCharacters"
-                android:text="@={primaryData.userData.professionalInfo.grade}"
+                android:text="@={primaryData.userProfessionalData.grade}"
                 app:layout_constraintTop_toBottomOf="@id/txtTitleGrade" />
 
             <View
@@ -116,7 +116,7 @@
                 android:hint="@string/hint_experience"
                 android:inputType="number"
                 android:maxLength="2"
-                android:text="@={primaryData.userData.professionalInfo.experience}"
+                android:text="@={primaryData.userProfessionalData.experience}"
                 app:layout_constraintTop_toBottomOf="@id/txtTitleExperience" />
 
             <TextView

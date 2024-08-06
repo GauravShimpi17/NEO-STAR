@@ -1,4 +1,4 @@
-package com.example.registration.util.enumClass
+package com.example.registration.view.util.enumClass
 
 enum class Designation(val designation :String) {
     SENIOR_DEVELOPER("Senior Developer"),

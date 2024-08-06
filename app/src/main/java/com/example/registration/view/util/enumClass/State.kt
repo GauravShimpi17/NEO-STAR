@@ -1,4 +1,4 @@
-    package com.example.registration.util.enumClass
+    package com.example.registration.view.util.enumClass
 enum class State(val state : String) {
     MAHARASHTRA("Maharashtra"),
     GUJARAT("Gujarat"),

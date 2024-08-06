@@ -1,4 +1,4 @@
-package com.example.registration.util
+package com.example.registration.view.util
 
 import android.R
 import android.content.Context
@@ -12,11 +12,11 @@ class Util {
 
 
     object SpinnerUtils {
-
         fun generateYearList(startYear: Int = 1999): List<Int> {
             val currentYear = Calendar.getInstance().get(Calendar.YEAR)
             return (startYear..currentYear).toList()
         }
+
         fun <T> populateSpinner(
             context: Context,
             spinner: Spinner,

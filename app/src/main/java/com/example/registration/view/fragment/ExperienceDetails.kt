@@ -11,10 +11,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.registration.R
 import com.example.registration.databinding.FragmentExperienceDetailsBinding
-import com.example.registration.util.enumClass.Education
-import com.example.registration.util.Util
-import com.example.registration.util.enumClass.Designation
-import com.example.registration.util.enumClass.Domain
+import com.example.registration.view.util.enumClass.Education
+import com.example.registration.view.util.Util
+import com.example.registration.view.util.enumClass.Designation
+import com.example.registration.view.util.enumClass.Domain
 import com.example.registration.viewModel.UserViewModel
 
 
@@ -93,7 +93,7 @@ class ExperienceDetails : Fragment() {
         val years = Util.SpinnerUtils.generateYearList()
 
         val spinnerDesignation = binding.spnDesignation
-        val designation =Designation.entries.map { it.designation }.toMutableList()
+        val designation = Designation.entries.map { it.designation }.toMutableList()
 
         val spinnerDomain = binding.spnDomain
         val domain = Domain.entries.map { it.domain }.toMutableList()
@@ -107,11 +107,11 @@ class ExperienceDetails : Fragment() {
             var educationLevel = Education.NONE
             if (it != null) {
 
-                educationLevel = Education.valueOf(it.uppercase().replace(" ", "_"))
+                educationLevel = Education.valueOf(it.uppercase().replace(" ", "_").replace("/", "_"))
             }
-            val oldData = viewModel.userData.get() ?: return@populateSpinner
-            val newData = oldData.copy(professionalInfo = oldData.professionalInfo.copy(education = educationLevel))
-            viewModel.userData.set(newData)
+            val oldData = viewModel.userProfessionalData.get() ?: return@populateSpinner
+            val newData = oldData.copy(education = educationLevel.toString())
+            viewModel.userProfessionalData.set(newData)
             Toast.makeText(requireContext(), "Selected: ${it ?: "None"}", Toast.LENGTH_SHORT).show()
         }
 
@@ -138,9 +138,9 @@ class ExperienceDetails : Fragment() {
             if (it != null) {
                 designationLevel = Designation.valueOf(it.uppercase().replace(" ", "_"))
             }
-            val oldData = viewModel.userData.get() ?: return@populateSpinner
-            val newData = oldData.copy(professionalInfo = oldData.professionalInfo.copy(designation = designationLevel.toString()))
-            viewModel.userData.set(newData)
+            val oldData = viewModel.userProfessionalData.get() ?: return@populateSpinner
+            val newData = oldData.copy(designation = designationLevel.toString())
+            viewModel.userProfessionalData.set(newData)
             Toast.makeText(requireContext(), "Selected: ${it ?: "None"}", Toast.LENGTH_SHORT).show()
         }
 
@@ -155,9 +155,9 @@ class ExperienceDetails : Fragment() {
 
                 domainLevel = Domain.valueOf(it.uppercase().replace(" ", "_"))
             }
-            val oldData = viewModel.userData.get() ?: return@populateSpinner
-            val newData = oldData.copy(professionalInfo = oldData.professionalInfo.copy(domain = domainLevel.toString()))
-            viewModel.userData.set(newData)
+            val oldData = viewModel.userProfessionalData.get() ?: return@populateSpinner
+            val newData = oldData.copy(domain = domainLevel.toString())
+            viewModel.userProfessionalData.set(newData)
             Toast.makeText(requireContext(), "Selected: ${it ?: "None"}", Toast.LENGTH_SHORT).show()
         }
 

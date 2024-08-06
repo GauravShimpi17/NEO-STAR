@@ -1,4 +1,4 @@
-package com.example.registration.util.enumClass
+package com.example.registration.view.util.enumClass
 
 enum class Domain(val domain : String) {
     SOFTWARE_DEVELOPMENT("Software Development"),

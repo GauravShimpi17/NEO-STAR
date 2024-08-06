@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.registration.R
+import com.example.registration.data.database.AppDatabase
+import com.example.registration.data.repo.LocalUserRepo
 import com.example.registration.databinding.FragmentAddressDetailsBinding
-import com.example.registration.util.enumClass.State
-import com.example.registration.util.Util
+import com.example.registration.view.util.enumClass.State
+import com.example.registration.view.util.Util
 import com.example.registration.viewModel.UserViewModel
 
 
@@ -40,11 +42,18 @@ class AddressDetails : Fragment() {
         setUpToolbar()
         populateSpinner()
 
+        val repo = LocalUserRepo(AppDatabase.getDatabase(requireContext()))
         viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
 
         binding.primaryData = viewModel
         binding.btnSubmit.setOnClickListener {
-            Log.d("hello", viewModel.userData.get().toString())
+            Log.d("hello", viewModel.userPrimaryData.get().toString())
+            Log.d("hello", viewModel.userProfessionalData.get().toString())
+            Log.d("hello", viewModel.userAddressData.get().toString())
+            val user = viewModel.userPrimaryData.get() ?: return@setOnClickListener
+            val professionalData = viewModel.userProfessionalData.get() ?: return@setOnClickListener
+            val addressData = viewModel.userAddressData.get() ?: return@setOnClickListener
+            viewModel.saveUser(user, professionalData, addressData)
         }
     }
 
@@ -86,9 +95,9 @@ class AddressDetails : Fragment() {
             if (it != null) {
                 state = State.valueOf(it.uppercase().replace(" ", "_"))
             }
-            val oldData = viewModel.userData.get() ?: return@populateSpinner
-            val newData = oldData.copy(addressData = oldData.addressData.copy(state = state))
-            viewModel.userData.set(newData)
+            val oldData = viewModel.userAddressData.get() ?: return@populateSpinner
+            val newData = oldData.copy(state = state.toString())
+            viewModel.userAddressData.set(newData)
         }
 
         /*val adapter = ArrayAdapter(

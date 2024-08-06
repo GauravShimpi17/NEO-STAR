@@ -35,7 +35,7 @@
                 android:drawableStart="@drawable/ic_address"
                 android:hint="@string/hint_address"
                 android:inputType="text"
-                android:text="@={primaryData.userData.addressData.address}"
+                android:text="@={primaryData.userAddressData.address}"
                 app:layout_constraintTop_toBottomOf="@id/appbarAddress" />
 
             <EditText
@@ -46,7 +46,7 @@
                 android:drawableStart="@drawable/ic_address"
                 android:hint="@string/hint_landmark"
                 android:inputType="text"
-                android:text="@={primaryData.userData.addressData.landmark}"
+                android:text="@={primaryData.userAddressData.landmark}"
                 app:layout_constraintTop_toBottomOf="@id/txtAddress" />
 
             <EditText
@@ -57,7 +57,7 @@
                 android:drawableStart="@drawable/ic_address"
                 android:hint="@string/hint_city"
                 android:inputType="text"
-                android:text="@={primaryData.userData.addressData.city}"
+                android:text="@={primaryData.userAddressData.city}"
                 app:layout_constraintTop_toBottomOf="@id/txtLandmark" />
 
             <Spinner
@@ -75,7 +75,7 @@
                 android:drawableStart="@drawable/ic_address"
                 android:hint="@string/hint_pinCode"
                 android:inputType="number"
-                android:text="@={primaryData.userData.addressData.pinCode}"
+                android:text="@={primaryData.userAddressData.pinCode}"
                 android:maxLength="6"
                 app:layout_constraintTop_toBottomOf="@id/spnState" />
 
