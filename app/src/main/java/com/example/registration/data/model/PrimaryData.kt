@@ -13,7 +13,7 @@ data class PrimaryData(
     var gender: String = "",
     var password: String = "",
     var confirmPassword: String = "",
-    var image: ByteArray? = null, // Store image as a BLOB
+    var image: ByteArray? = null,
     @PrimaryKey(autoGenerate = true)
     var primaryInfoId: Long = 0
 )

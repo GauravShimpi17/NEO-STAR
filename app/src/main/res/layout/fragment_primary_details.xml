@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:overScrollMode="never"
         android:scrollbars="none"
-        tools:context=".view.fragment.PrimaryDetails">
+        tools:context=".view.fragment.PrimaryDetailsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

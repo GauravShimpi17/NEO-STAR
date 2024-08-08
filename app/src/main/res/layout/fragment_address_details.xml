@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="primaryData"
             type="com.example.registration.viewModel.UserViewModel" />
@@ -14,7 +15,7 @@
         android:layout_height="match_parent"
         android:overScrollMode="never"
         android:scrollbars="none"
-        tools:context=".view.fragment.AddressDetails">
+        tools:context=".view.fragment.AddressDetailsFragment">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,12 +61,18 @@
                 android:text="@={primaryData.userAddressData.city}"
                 app:layout_constraintTop_toBottomOf="@id/txtLandmark" />
 
-            <Spinner
-                android:id="@+id/spnState"
+            <LinearLayout
+                android:id="@+id/layoutState"
                 style="@style/styleSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/txtCity" />
+                app:layout_constraintTop_toBottomOf="@id/txtCity">
+
+                <Spinner
+                    android:id="@+id/spnState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/txtPinCode"
@@ -75,9 +82,9 @@
                 android:drawableStart="@drawable/ic_address"
                 android:hint="@string/hint_pinCode"
                 android:inputType="number"
-                android:text="@={primaryData.userAddressData.pinCode}"
                 android:maxLength="6"
-                app:layout_constraintTop_toBottomOf="@id/spnState" />
+                android:text="@={primaryData.userAddressData.pinCode}"
+                app:layout_constraintTop_toBottomOf="@id/layoutState" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSubmit"

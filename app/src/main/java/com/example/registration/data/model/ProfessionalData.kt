@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "professional_info")
 data class ProfessionalData(
-    var primaryInfoId: Long = 0, // Foreign key to primary_info
+    var primaryInfoId: Long = 0,
     var education: String = "",
     var yearOfPassing: String = "",
     var grade: String = "",

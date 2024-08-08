@@ -1,8 +1,10 @@
 package com.example.registration.data.repo
 
+import androidx.lifecycle.LiveData
 import com.example.registration.data.database.AppDatabase
 import com.example.registration.data.model.AddressData
 import com.example.registration.data.model.PrimaryData
+import com.example.registration.data.model.PrimaryDataWithDetails
 import com.example.registration.data.model.ProfessionalData
 
 class LocalUserRepo(private val database: AppDatabase) : UserRepo {
@@ -16,7 +18,7 @@ class LocalUserRepo(private val database: AppDatabase) : UserRepo {
         database.addressDao().insertAddressInfo(addressData.copy(primaryInfoId = id))
     }
 
-    override fun getUsers(): List<PrimaryData> {
-        TODO("Not yet implemented")
+    override fun getUsers(): LiveData<List<PrimaryDataWithDetails>> {
+        return database.primaryDataDao().getAllUsers()
     }
 }

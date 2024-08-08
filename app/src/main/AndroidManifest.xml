@@ -13,15 +13,17 @@
         android:theme="@style/Theme.Registration"
         tools:targetApi="31">
         <activity
-            android:name=".view.RegistrationActivity"
+            android:name=".view.activity.HomePageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.activity.RegistrationActivity"
             android:exported="true">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +31,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:exported="true">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.registration.fragment.fileProvider"
@@ -39,7 +54,5 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
-
-
 
 </manifest>

@@ -18,6 +18,6 @@ interface PrimaryDataDao {
     @Query("SELECT * FROM primary_info WHERE primaryInfoId = :id")
     fun getPrimaryDataWithDetails(id: String): LiveData<PrimaryDataWithDetails>
 
-    @Query("SELECT * FROM primary_info")
-    fun getAllUsers(): LiveData<List<PrimaryData>>
+    @Query("SELECT * FROM primary_info LIMIT 100 OFFSET 0")
+    fun getAllUsers(): LiveData<List<PrimaryDataWithDetails>>
 }

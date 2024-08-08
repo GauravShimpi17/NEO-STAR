@@ -6,7 +6,7 @@ import com.example.registration.view.util.enumClass.State
 
 @Entity(tableName = "address_data")
 data class AddressData(
-    var primaryInfoId: Long = 0, // Foreign key to primary_info
+    var primaryInfoId: Long = 0,
     var address: String = "",
     var landmark: String = "",
     var city: String = "",
