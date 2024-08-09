@@ -66,6 +66,7 @@
                 style="@style/styleSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/txtCity">
 
                 <Spinner
@@ -73,6 +74,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+                <TextView
+                    android:id="@+id/error_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="visible"
+                    android:text="Error message here"
+                    app:layout_constraintTop_toBottomOf="@id/layoutState"
+                    app:layout_constraintStart_toStartOf="@id/layoutState"/>
 
             <EditText
                 android:id="@+id/txtPinCode"
@@ -84,7 +94,8 @@
                 android:inputType="number"
                 android:maxLength="6"
                 android:text="@={primaryData.userAddressData.pinCode}"
-                app:layout_constraintTop_toBottomOf="@id/layoutState" />
+                app:layout_constraintTop_toBottomOf="@id/error_text_view"
+                />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSubmit"

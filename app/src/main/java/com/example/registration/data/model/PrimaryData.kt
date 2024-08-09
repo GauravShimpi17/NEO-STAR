@@ -13,7 +13,7 @@ data class PrimaryData(
     var gender: String = "",
     var password: String = "",
     var confirmPassword: String = "",
-    var image: ByteArray? = null,
+    val imageUri: String? = "",
     @PrimaryKey(autoGenerate = true)
     var primaryInfoId: Long = 0
 )

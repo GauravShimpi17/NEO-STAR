@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
+    app:cardElevation="3dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:padding="8dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgProfile"
@@ -25,44 +25,84 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/profile_shape" />
 
+
         <TextView
             android:id="@+id/txtName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/txtUserName"
             app:layout_constraintStart_toEndOf="@id/imgProfile"
+            app:layout_constraintTop_toTopOf="@id/imgProfile"
+            android:text="Profile Name :" />
+        <TextView
+            android:id="@+id/txtUserName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtName"
             app:layout_constraintTop_toTopOf="@id/imgProfile"
             tools:text="Profile Name" />
 
         <TextView
             android:id="@+id/txtEducation"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:text="Education : "
+            app:layout_constraintEnd_toStartOf="@id/txtUserEducation"
+            app:layout_constraintStart_toEndOf="@+id/imgProfile"
+            app:layout_constraintTop_toBottomOf="@id/txtName" />
+
+        <TextView
+            android:id="@+id/txtUserEducation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgProfile"
-            app:layout_constraintTop_toBottomOf="@id/txtName"
+            app:layout_constraintStart_toEndOf="@id/txtEducation"
+            app:layout_constraintTop_toBottomOf="@id/txtUserName"
             tools:text="Education" />
 
         <TextView
             android:id="@+id/txtExperience"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/txtUserEducation"
             app:layout_constraintStart_toEndOf="@id/imgProfile"
+            app:layout_constraintTop_toBottomOf="@id/txtEducation"
+            android:text="Experience : " />
+
+        <TextView
+            android:id="@+id/txtUserExperience"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtExperience"
             app:layout_constraintTop_toBottomOf="@id/txtEducation"
             tools:text="Experience" />
 
         <TextView
             android:id="@+id/txtAddress"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/txtAddress"
             app:layout_constraintStart_toEndOf="@id/imgProfile"
             app:layout_constraintTop_toBottomOf="@id/txtExperience"
+            android:text="Address : " />
+
+        <TextView
+            android:id="@+id/txtUserAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtAddress"
+            app:layout_constraintTop_toBottomOf="@id/txtUserExperience"
             tools:text="Address" />
 
 

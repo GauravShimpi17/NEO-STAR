@@ -7,11 +7,12 @@
         <variable
             name="primaryData"
             type="com.example.registration.viewModel.UserViewModel" />
+
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:overScrollMode="never"
         android:scrollbars="none"
         tools:context=".view.fragment.PrimaryDetailsFragment">
@@ -66,6 +67,7 @@
                 android:hint="@string/hint_firstname"
                 android:inputType="textCapWords"
                 android:text="@={primaryData.userPrimaryData.firstName}"
+                android:importantForAccessibility="yes"
                 app:layout_constraintTop_toBottomOf="@id/txtTitleFirstName" />
 
             <TextView
@@ -103,6 +105,7 @@
                 android:drawableStart="@drawable/ic_phone"
                 android:hint="@string/hint_phone_number"
                 android:inputType="phone"
+                android:maxLength="10"
                 android:text="@={primaryData.userPrimaryData.phoneNumber}"
                 app:layout_constraintTop_toBottomOf="@id/txtTitlePhoneNumber" />
 
@@ -145,7 +148,6 @@
                     android:id="@+id/rbMale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:text="@string/rb_txt_male" />
 
                 <RadioButton

@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.registration.R
+import com.example.registration.data.model.AddressData
+import com.example.registration.data.model.PrimaryData
 import com.example.registration.databinding.FragmentAddressDetailsBinding
 import com.example.registration.view.util.enumClass.Designation
 import com.example.registration.view.util.enumClass.Education
@@ -37,6 +39,7 @@ class AddressDetailsFragment : Fragment() {
         setUpViewModel()
         setUpToolbar()
         populateSpinner()
+        setupObservers()
         setOnClickListeners()
 
     }
@@ -66,14 +69,43 @@ class AddressDetailsFragment : Fragment() {
 
     }
 
-    private fun setOnClickListeners(){
-        binding.btnSubmit.setOnClickListener {
-            val user = viewModel.userPrimaryData.get() ?: return@setOnClickListener
-            val professionalData = viewModel.userProfessionalData.get() ?: return@setOnClickListener
-            val addressData = viewModel.userAddressData.get() ?: return@setOnClickListener
-            viewModel.saveUser(user, professionalData, addressData)
-            requireActivity().finish()
+    private fun setupObservers() {
+        viewModel.addressDataError.observe(viewLifecycleOwner) { error ->
+            if (error == null) return@observe
+            binding.txtAddress.error = error.addressError
+            binding.txtLandmark.error = error.landmarkError
+            binding.txtCity.error = error.cityNameError
+            binding.txtPinCode.error = error.pinCodeError
+            if (error.stateError != null) {
+                binding.errorTextView.text = error.stateError
+            } else {
+                binding.errorTextView.text = "Select State"
+            }
         }
+    }
+
+    private fun setOnClickListeners() {
+
+        binding.btnSubmit.setOnClickListener {
+
+            val addressDataSet = AddressData(
+                address = binding.txtAddress.text.toString(),
+                landmark = binding.txtLandmark.text.toString(),
+                city = binding.txtCity.text.toString(),
+                state = binding.spnState.selectedItem.toString(),
+                pinCode = binding.txtPinCode.text.toString()
+            )
+
+            if (viewModel.validateAddressData(addressDataSet)) {
+                val user = viewModel.userPrimaryData.get() ?: return@setOnClickListener
+                val professionalData =
+                    viewModel.userProfessionalData.get() ?: return@setOnClickListener
+                val addressData = viewModel.userAddressData.get() ?: return@setOnClickListener
+                viewModel.saveUser(user, professionalData, addressData)
+                requireActivity().finish()
+            }
+        }
+
     }
 
     private fun populateSpinner() {

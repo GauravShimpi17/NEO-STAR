@@ -44,5 +44,6 @@
     <string name="edt_password">Password</string>
     <string name="btn_login_txt">Login</string>
     <string name="fab_description">floating button</string>
+    <string name="card_text">Experience : </string>
 
 </resources>

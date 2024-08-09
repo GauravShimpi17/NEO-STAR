@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.registration.R
+import com.example.registration.data.model.PrimaryData
+import com.example.registration.data.model.ProfessionalData
 import com.example.registration.databinding.FragmentExperienceDetailsBinding
 import com.example.registration.view.util.enumClass.Education
 import com.example.registration.view.util.enumClass.Designation
@@ -41,8 +43,9 @@ class ExperienceDetailsFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         binding.primaryData = viewModel
         setUpToolbar()
-        setOnClickListener()
         populateSpinner()
+        setOnClickListener()
+        setupObservers()
     }
 
     private fun setUpToolbar() {
@@ -71,15 +74,45 @@ class ExperienceDetailsFragment : Fragment() {
         }
 
         binding.btnPrevious.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.frameRegistration, PrimaryDetailsFragment()).addToBackStack(null)
-                .commit()
+            val professionalData = ProfessionalData(
+                experience = binding.txtExperience.text.toString(),
+                grade = binding.txtExperience.text.toString(),
+                designation = binding.spnDesignation.selectedItem.toString(),
+                education = binding.spnEducation.selectedItem.toString(),
+            )
+            if (viewModel.validateExperienceData(professionalData)) {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.frameRegistration, PrimaryDetailsFragment()).addToBackStack(null)
+                    .commit()
+            }
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.professionalDataError.observe(viewLifecycleOwner) { error ->
+            if (error == null) return@observe
+            binding.txtGrade.error = error.grade
+            binding.txtExperience.error = error.experience
+            if (error.education != null) {
+                binding.errorTextView.text = error.education
+            } else {
+                binding.errorTextView.text = "Select education"
+            }
+            if (error.yearOfPassing != null) {
+                binding.errorTextViewPassingYear.text = error.yearOfPassing
+            } else {
+                binding.errorTextViewPassingYear.text = "Select year of passing"
+            }
+            if (error.designation != null) {
+                binding.errorTextViewDesignation.text = error.yearOfPassing
+            } else {
+                binding.errorTextViewDesignation.text = "Select designation"
+            }
         }
     }
 
     private fun populateSpinner() {
 
-//        Education
         val selectedItemEducation = Education.getEducation(
             viewModel.userProfessionalData.get()?.education ?: Education.NONE.toString()
         ).ordinal
@@ -95,13 +128,14 @@ class ExperienceDetailsFragment : Fragment() {
             Toast.makeText(requireContext(), "Selected: $it", Toast.LENGTH_SHORT).show()
         }
 
-//        Year of Passing
         val spinnerYear = binding.spnPassingYear
         val years = generateYearList()
-        val yearOfPassingStr = viewModel.userProfessionalData.get()?.yearOfPassing ?: Calendar.getInstance().get(Calendar.YEAR)
+        val yearOfPassingStr =
+            viewModel.userProfessionalData.get()?.yearOfPassing ?: Calendar.getInstance()
+                .get(Calendar.YEAR)
         var selectedItemYear = 0
         generateYearList().forEachIndexed { index, i ->
-            if (i.toString()==yearOfPassingStr){
+            if (i.toString() == yearOfPassingStr) {
                 selectedItemYear = index
             }
         }
@@ -118,7 +152,6 @@ class ExperienceDetailsFragment : Fragment() {
             viewModel.userProfessionalData.set(newData)
         }
 
-//        Designation
         val spinnerDesignation = binding.spnDesignation
         val selectedItemDesignation = Designation.getEducation(
             viewModel.userProfessionalData.get()?.designation ?: Designation.NONE.toString()
@@ -133,7 +166,6 @@ class ExperienceDetailsFragment : Fragment() {
             Toast.makeText(requireContext(), "Selected: $it", Toast.LENGTH_SHORT).show()
         }
 
-//        Domain
         val spinnerDomain = binding.spnDomain
         val selectedItemDomain = Domain.getEducation(
             viewModel.userProfessionalData.get()?.domain ?: Domain.NONE.toString()
@@ -149,7 +181,4 @@ class ExperienceDetailsFragment : Fragment() {
         }
 
     }
-
-
-
 }

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.registration.R
 import com.example.registration.data.model.PrimaryDataWithDetails
 import com.example.registration.databinding.ProfileCardBinding
 import com.example.registration.view.util.load
@@ -32,13 +33,18 @@ class GetAllAdapter() : RecyclerView.Adapter<GetAllAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = dataList[position]
         Log.d(TAG,item.toString())
+        Log.d(TAG, item.toString())
         with(holder.binding) {
-            imgProfile.load(item.primaryData.image)
-
-            txtName.text = item.primaryData.firstName
-            txtEducation.text = item.professionalData?.education ?: "N/A"
-            txtExperience.text = item.professionalData?.experience ?: "N/A"
-            txtAddress.text = item.addressData?.address ?: "N/A"
+            // Load image using Glide
+            Glide.with(imgProfile.context)
+                .load(item.primaryData.imageUri)
+                .placeholder(R.drawable.profile) // Add a placeholder image if needed
+                .error(R.drawable.profile) // Add an error image if needed
+                .into(imgProfile)
+            txtUserName.text = item.primaryData.firstName
+            txtUserEducation.text = item.professionalData?.education ?: "N/A"
+            txtUserExperience.text = item.professionalData?.experience ?: "N/A"
+            txtUserAddress.text = item.addressData?.address ?: "N/A"
         }
     }
 

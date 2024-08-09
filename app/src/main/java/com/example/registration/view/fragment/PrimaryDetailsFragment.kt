@@ -1,7 +1,6 @@
 package com.example.registration.view.fragment
 
 import android.app.AlertDialog
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,10 +16,11 @@ import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.registration.R
+import com.example.registration.data.model.PrimaryData
 import com.example.registration.databinding.FragmentPrimaryDetailsBinding
-import com.example.registration.view.util.bitmapToByteArray
 import com.example.registration.view.util.cropImageToAspectRatio
-import com.example.registration.view.util.getBitmapFromUri
+import com.example.registration.view.util.toBitmap
+import com.example.registration.view.util.toUri
 import com.example.registration.viewModel.UserViewModel
 import com.google.android.material.imageview.ShapeableImageView
 import java.io.File
@@ -45,7 +44,9 @@ class PrimaryDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_primary_details, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_primary_details,
+                container,
+                false)
         return binding.root
     }
 
@@ -53,11 +54,11 @@ class PrimaryDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         showPassword()
-        setOnClickListener()
         profileImage()
         initializeActivityResultLaunchers()
-
         restoreGenderSelection()
+        setOnClickListener()
+        setupObservers()
 
     }
 
@@ -65,6 +66,20 @@ class PrimaryDetailsFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         binding.primaryData = viewModel
 
+    }
+
+    private fun setupObservers() {
+        viewModel.primaryDataError.observe(viewLifecycleOwner){error->
+            if (error == null) return@observe
+            println(error)
+            binding.txtFirstName.error = error.firstNameError.also { println(it) }
+            binding.txtLastName.error = error.lastNameError
+            binding.txtPhoneNumber.error = error.phoneNumberError
+            binding.txtMail.error = error.emailError
+            binding.txtPassword.error = error.passwordError
+            binding.txtConfirmPassword.error = error.confirmPasswordError
+
+        }
     }
 
     private fun restoreGenderSelection() {
@@ -123,28 +138,27 @@ class PrimaryDetailsFragment : Fragment() {
         cameraResultLauncher =
             registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
                 if (isSuccess) {
-                    handleImage(imageUri)
+                    cropAndHandleImage(imageUri)
                 }
             }
 
         galleryResultLauncher =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
                 uri?.let {
-                    handleImage(it)
+                    cropAndHandleImage(it)
                 }
             }
     }
 
-    private fun handleImage(uri: Uri) {
-        val bitmap: Bitmap = uri.getBitmapFromUri(requireContext())
+    private fun cropAndHandleImage(uri: Uri) {
+        val bitmap = uri.toBitmap(requireContext())
         val aspectRatio = 1f
         val croppedBitmap = bitmap.cropImageToAspectRatio(aspectRatio)
+        val croppedImageUri = croppedBitmap.toUri(requireContext(), "cropped_image${pos++}")
 
-        val byteArray = bitmapToByteArray(croppedBitmap)
-        viewModel.setImage(byteArray)
-
+        viewModel.setImageUri(croppedImageUri)
         val imageView: ShapeableImageView = binding.profileImage
-        imageView.setImageBitmap(croppedBitmap)
+        imageView.setImageURI(croppedImageUri)
     }
 
     private fun createImageUri(): Uri {
@@ -185,11 +199,23 @@ class PrimaryDetailsFragment : Fragment() {
     }
 
     private fun setOnClickListener() {
+
         binding.btnNext.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.frameRegistration, ExperienceDetailsFragment())
-                .addToBackStack(null)
-                .commit()
+            val primaryData = PrimaryData(
+                firstName = binding.txtFirstName.text.toString(),
+                lastName = binding.txtLastName.text.toString(),
+                email = binding.txtMail.text.toString(),
+                phoneNumber = binding.txtPhoneNumber.text.toString(),
+                password = binding.txtPassword.text.toString(),
+                confirmPassword = binding.txtConfirmPassword.text.toString()
+            )
+
+            if (viewModel.validatePrimaryData(primaryData)) {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.frameRegistration, ExperienceDetailsFragment())
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
     }
 }
